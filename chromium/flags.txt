@@ -1,0 +1,14 @@
+chrome://apps/
+chrome://discards/
+chrome://flags/#allow-insecure-localhost
+chrome://flags/#enable-gpu-rasterization
+chrome://flags/#load-media-router-component-extension
+chrome://flags/#omnibox-ui-hide-steady-state-url-scheme
+chrome://flags/#overlay-scrollbars
+chrome://flags/#proactive-tab-freeze-and-discard
+chrome://flags/#simplify-https-indicator
+chrome://flags/#smooth-scrolling
+chrome://media-router/
+chrome://net-internals/#dns
+chrome://net-internals/#events
+chrome://settings/passwords

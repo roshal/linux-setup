@@ -1,3 +1,4 @@
+
 # dd if=/dev/urandom of=/dev/<drive> bs=1M
 # l /sys/firmware/efi/efivars
 timedatectl set-ntp true
@@ -120,3 +121,21 @@ nano /etc/lvm/lvm.conf
 # lvcreate ssd -n root -L 20G
 # btrfs subvolume create /mnt/@root
 # mkfs.btrfs /dev/ssd/root
+
+
+
+
+sed --in-place '/^# en_US\.UTF-8\b/s/..//' /etc/locale.gen
+sed --in-place '/^# ru_RU\.UTF-8\b/s/..//' /etc/locale.gen
+
+sed --in-place --null-data 's/\n\n\n/\n\nru_RU.UTF-8 UTF-8\nen_US.UTF-8 UTF-8\n\n/' /etc/locale.gen
+
+sed --in-place '6iru_RU.UTF-8 UTF-8' /etc/locale.gen
+sed --in-place '6ien_US.UTF-8 UTF-8' /etc/locale.gen
+
+sed -i.backup '/^#Server\b/s/.//' /etc/pacman.d/mirrorlist
+
+sed --in-place ':a;N;$!ba;s/\n\n/\0en_US.UTF-8 UTF-8\n/' /etc/locale.gen
+
+parted -s /dev/sdb mklabel gpt mkpart esp fat32 0% 100% set 1 esp on set 1 boot on print
+sgdisk --zap-all --new 0 --typecode 0:ef00 /dev/sdb

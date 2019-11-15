@@ -1,0 +1,4 @@
+
+http://tdkare.ru/sysadmin/index.php/Chromium-browser
+https://wiki.ubuntuusers.de/Chromium/#Proxy-Nutzung
+sudo subl /etc/chromium-browser/default

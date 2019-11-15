@@ -1,0 +1,8 @@
+
+# device       directory  type  options  dump  pass
+
+/dev/lvm/root  /          ext4  discard  0     1
+/dev/lvm/boot  /boot      ext4  discard  0     2
+/dev/lvm/home  /home      ext4  discard  0     2
+/dev/lvm/var   /var       ext4  discard  0     2
+/dev/lvm/swap  none       swap  discard  0     0

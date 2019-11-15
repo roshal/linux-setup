@@ -1,3 +1,4 @@
+
 pacman -S sudo zsh
 nano /etc/sudoers
 # %wheel ALL=(ALL) ALL
@@ -36,7 +37,6 @@ sudo pacman -S firefox
 sudo pacman -S telegram
 
 sudo pacman -S filezilla
-sudo pacman -S transmission-cli
 sudo pacman -S transmission-gtk
 sudo pacman -S vlc
 

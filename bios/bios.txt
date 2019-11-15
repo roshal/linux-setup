@@ -1,0 +1,11 @@
+
+https://www.asus.com/RU/support/FAQ/1040820
+bios - reset cmos
+
+https://www.asus.com/Motherboards/TUF-Z390M-PRO-GAMING-WI-FI/
+motherboard
+
+https://www.archlinux.org/mirrorlist/all/https/
+mirrorlist for pacman
+
+

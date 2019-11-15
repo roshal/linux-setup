@@ -1,77 +1,71 @@
-wifi-menu
 
 timedatectl set-ntp true
 
-fdisk /dev/sda
-# o
-# n
-# w
+sgdisk --zap-all --new 0 --typecode 0:ef00 /dev/sdb
+mkfs.fat /dev/sdb1
 
-pvcreate     /dev/sda1
-vgcreate lvm /dev/sda1
+pvcreate     /dev/nvme0n1
+vgcreate lvm /dev/nvme0n1
 
-lvcreate lvm -n boot -L   1g
-lvcreate lvm -n home -L 256g
-lvcreate lvm -n root -L  32g
-lvcreate lvm -n swap -L   4g
-lvcreate lvm -n var  -L  16g
+lvcreate lvm --name root --size  32g
+lvcreate lvm --name boot --size   1g
+lvcreate lvm --name home --size 256g
+lvcreate lvm --name var  --size  16g
+lvcreate lvm --name swap --size  32g
 
-mkfs.ext2 /dev/lvm/boot
-mkfs.ext4 /dev/lvm/home
 mkfs.ext4 /dev/lvm/root
+mkfs.ext4 /dev/lvm/boot
+mkfs.ext4 /dev/lvm/home
 mkfs.ext4 /dev/lvm/var
 
 mkswap /dev/lvm/swap
 swapon /dev/lvm/swap
 
-mount /dev/lvm/root /mnt
+mount --options discard /dev/lvm/root /mnt
 
 mkdir /mnt/boot
 mkdir /mnt/home
 mkdir /mnt/var
 
-mount /dev/lvm/boot /mnt/boot
-mount /dev/lvm/home /mnt/home
-mount /dev/lvm/var  /mnt/var
+mount --options discard /dev/lvm/boot /mnt/boot
+mount --options discard /dev/lvm/home /mnt/home
+mount --options discard /dev/lvm/var  /mnt/var
 
-nano /etc/pacman.d/mirrorlist
-# Server = http://mirror.yandecfx.ru/archlinux/$repo/os/$arch
+sed -i.backup 's/^#\b//' /etc/pacman.d/mirrorlist
+rankmirrors /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist
 
 pacstrap /mnt base
 
-genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -t uuid /mnt > /mnt/etc/fstab
 
 arch-chroot /mnt
 
-ln -fs /usr/share/zoneinfo/Europe/Moscow /etc/localtime
-hwclock -w
+ln --force --symbolic /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+hwclock --systohc
 
-nano /etc/locale.gen
-# en_US.UTF-8 UTF-8
-# ru_RU.UTF-8 UTF-8
+sed --in-place ':a;N;$!ba;s/\n+/\n\n\n/' /etc/locale.gen
+sed --in-place '0,/^$/s//\nru_RU.UTF-8 UTF-8/' /etc/locale.gen
+sed --in-place '0,/^$/s//\nen_US.UTF-8 UTF-8/' /etc/locale.gen
+echo 'LANG=en_US.UTF-8' >> /etc/locale.conf
 locale-gen
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
-echo "archlinux" > /etc/hostname
-nano /etc/hosts
-# 127.0.1.1 archlinux.localdomain archlinux
+echo host > /etc/hostname
 
-nano /etc/mkinitcpio.conf
-# HOOKS="... lvm2 filesystems ..."
+sed --in-place '/^HOOKS\>/s/\<filesystems\>/lvm2 &/' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
-passwd
-
-pacman -S grub
-
-nano /etc/default/grub
-# GRUB_PRELOAD_MODULES="... lvm"
-
-grub-install --target=i386-pc /dev/sda
-grub-mkconfig -o /boot/grub/grub.cfg
-
-pacman -S dialog wpa_supplicant
-
 exit
-umount -R /mnt
+umount --recursive /mnt
 reboot
+
+useradd --groups docker,wheel --create-home --shell /bin/zsh --user-group user
+passwd user
+
+sudo pacman --sync chromium
+sudo pacman --sync firefox
+sudo pacman --sync sway
+sudo pacman --sync swayidle
+sudo pacman --sync swaylock
+sudo pacman --sync telegram
+sudo pacman --sync transmission-gtk
+sudo pacman --sync vlc
