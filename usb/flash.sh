@@ -3,6 +3,8 @@ exit
 
 sudo dd status=progress bs=4096 if=/-/arch/archlinux-2019.10.01-x86_64.iso of=/dev/sdb
 
+sync
+
 sudo mkdir /mnt/iso-arch
 sudo mkdir /mnt/usb-arch
 sudo mount --options loop /-/arch/archlinux-2019.10.01-x86_64.iso /mnt/iso-arch
