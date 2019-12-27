@@ -1,7 +1,6 @@
 
 exit
 
-
 sudo fallocate -l 8g /swapfile
 
 sudo chmod 600 /swapfile
