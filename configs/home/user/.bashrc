@@ -38,12 +38,12 @@ alias sysu='systemctl suspend'
 
 alias suck='sysu && lock'
 
-alias g-f-f='cd /-/git.esphere.local/frontend/Fish'
-alias g-f-l='cd /-/git.esphere.local/frontend/Leda'
-alias g-c-l='cd /-/git.esphere.local/courier/light-ui'
-alias c-f-f='cd /-/git.esphere.local.copy/frontend/Fish'
-alias c-f-l='cd /-/git.esphere.local.copy/frontend/Leda'
-alias c-c-l='cd /-/git.esphere.local.copy/courier/light-ui'
+alias _gff='cd /-/git.esphere.local/frontend/Fish'
+alias _gfl='cd /-/git.esphere.local/frontend/Leda'
+alias _gcl='cd /-/git.esphere.local/courier/light-ui'
+alias _cff='cd /-/git.esphere.local.copy/frontend/Fish'
+alias _cfl='cd /-/git.esphere.local.copy/frontend/Leda'
+alias _ccl='cd /-/git.esphere.local.copy/courier/light-ui'
 
 # fix webstorm window draw
 # https://github.com/swaywm/sway/wiki/Running-programs-natively-under-wayland#java-under-xwayland
@@ -128,3 +128,8 @@ export QT_QPA_PLATFORM=wayland
 # https://github.com/swaywm/sway/wiki/Running-programs-natively-under-wayland#firefox
 # https://wiki.archlinux.org/index.php/Firefox#Wayland
 export MOZ_ENABLE_WAYLAND=1
+
+export WLR_RDP_TLS_CERT_PATH=/-/remmina/tls.crt
+export WLR_RDP_TLS_KEY_PATH=/-/remmina/tls.key
+WLR_RDP_ADDRESS=0.0.0.0
+WLR_BACKENDS=rdp

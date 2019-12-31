@@ -16,7 +16,6 @@ set $-terminal 'terminator'
 
 set $-output-0 'DP-1'
 set $-output-1 'HDMI-A-1'
-set $-output-2 'HDMI-A-2'
 
 set $-way-u up
 set $-way-l left
@@ -66,7 +65,7 @@ focus_follows_mouse no
 floating_minimum_size  256 x 256
 floating_maximum_size 1600 x 1024
 
-assign [instance="^telegram-desktop$"] $-workspace-8
+assign [app_id="^telegramdesktop$"] $-workspace-8
 
 # # swaymsg -t get_tree
 
@@ -88,12 +87,10 @@ assign [instance="^telegram-desktop$"] $-workspace-8
 
 for_window [shell="xwayland"] border normal 0
 
-for_window [app_id="^telegramdesktop$"] floating enable
 for_window [instance="^chromium$"] border none
 for_window [instance="^code-oss$"] border none
 for_window [instance="^jetbrains-webstorm$" title="^win0$"] border none
 for_window [instance="^jetbrains-webstorm$" title="^win0$"] floating enable
-for_window [instance="^telegram-desktop$"] floating enable
 
 font pango: monospace 12px
 
@@ -112,13 +109,11 @@ floating_modifier $-modifier
 
 output * bg /-/pictures/waves.jpg tile
 
-output $-output-0 disable
-output $-output-1 enable
-output $-output-2 disable
+output $-output-0 enable
+output $-output-1 disable
 
 output $-output-0 resolution 1920x1200
 output $-output-1 resolution 1920x1080
-output $-output-2 resolution 1920x1080
 
 bindsym --to-code $-modifier+o output $-output-0 toggle; output $-output-1 toggle
 
