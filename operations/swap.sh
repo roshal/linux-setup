@@ -15,8 +15,9 @@ cat /sys/fs/cgroup/memory/memory.swappiness
 
 sudo sysctl vm.swappiness=60
 
-sudo sysctl vm.swappiness=50
 sudo sysctl vm.swappiness=25
+sudo sysctl vm.swappiness=50
+sudo sysctl vm.swappiness=75
 
 # device                directory  type  options         dump  pass
 # /dev/mapper/lvm-swap  none       swap  discard,pri=80  0     0

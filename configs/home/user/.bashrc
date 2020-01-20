@@ -1,9 +1,6 @@
-#
-# ~/.bashrc
-#
 
 # If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+[[ ${-} != *i* ]] && return
 
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
@@ -96,7 +93,7 @@ function man {
   LESS_TERMCAP_md=$'\e[92m' \
   LESS_TERMCAP_us=$'\e[94m' \
   LESS_TERMCAP_so=$'\e[7m' \
-  command man "$@"
+  command man "${@}"
 }
 
 # if [[ -r /usr/share/doc/mcfly/mcfly.bash ]]
@@ -117,9 +114,9 @@ export HISTFILESIZE=65536
 # increase history size (default is 500)
 export HISTSIZE=${HISTFILESIZE}
 # if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
-if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
+if [[ ${-} =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
-if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
+if [[ ${-} =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
 # https://wiki.archlinux.org/index.php/Wayland#Qt_5
 # https://wiki.qt.io/QtWayland#Run_Qt_applications_as_Wayland_clients

@@ -1,7 +1,7 @@
 
 PATH="${HOME}/bin:${PATH}"
 
-if [[ "$SHELL" = '/bin/bash' ]]
+if [[ "${SHELL}" = '/bin/bash' ]]
 then
 	[[ -f ~/.bashrc ]] && . ~/.bashrc
 fi
