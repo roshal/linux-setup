@@ -22,7 +22,7 @@ lvcreate volume --name swap --size  32g
 
 # make the filesystems
 
-mkfs --type fat /dev/sda1
+mkfs --type fat -n ESP -i 64617461 /dev/sda1
 
 mkfs --type ext4 /dev/mapper/volume-root
 mkfs --type ext4 /dev/mapper/volume-boot
@@ -157,16 +157,28 @@ exit
 
 sudo systemctl enable --now dhcpcd
 
-yes | sudo pacman --sync chromium
-yes | sudo pacman --sync docker
-yes | sudo pacman --sync firefox
-yes | sudo pacman --sync gdm
-yes | sudo pacman --sync nano
-yes | sudo pacman --sync sway
-yes | sudo pacman --sync swayidle
-yes | sudo pacman --sync swaylock
-yes | sudo pacman --sync telegram-desktop
-yes | sudo pacman --sync terminator
-yes | sudo pacman --sync transmission-gtk
-yes | sudo pacman --sync vlc
-yes | sudo pacman --sync xorg-server-xwayland
+#
+
+yes | sudo pacman --sync yarn
+mkdir /-/grim
+
+mkdir --parents ~/.config/sway
+
+cp /etc/sway/config ~/.config/sway/config
+
+ssh-keygen -b 4096
+
+mkdir /-/aur
+mkdir /-/pictures
+mkdir /-/sublime
+mkdir /-/code-workspaces
+mkdir /-/github
+mkdir /-/grim
+
+sudo timedatectl set-ntp true
+
+sudo localectl set-locale en_US.UTF-8
+
+sudo localectl set-locale LC_TIME=C
+sudo localectl set-locale LC_COLLATE=C
+sudo localectl set-locale LC_MESSAGES=ru_RU.UTF-8
