@@ -55,3 +55,5 @@ systemctl enable dhcpcd
 systemctl start dhcpcd
 
 sudo systemctl reboot
+
+sudo sed --in-place '/^#Color$/s/^.//' /etc/pacman.conf
