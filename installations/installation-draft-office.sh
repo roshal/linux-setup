@@ -71,12 +71,12 @@ reboot
 
 adduser --groups docker,wheel user
 
-sudo pacman --sync chromium
-sudo pacman --sync firefox
-sudo pacman --sync gdm
-sudo pacman --sync sway
-sudo pacman --sync swayidle
-sudo pacman --sync swaylock
-sudo pacman --sync telegram
-sudo pacman --sync transmission-gtk
-sudo pacman --sync vlc
+pacman --sync chromium
+pacman --sync firefox
+pacman --sync gdm
+pacman --sync sway
+pacman --sync swayidle
+pacman --sync swaylock
+pacman --sync telegram
+pacman --sync transmission-gtk
+pacman --sync vlc
