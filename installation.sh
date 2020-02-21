@@ -13,12 +13,12 @@ sgdisk --zap-all /dev/nvme0n1
 pvcreate        /dev/nvme0n1
 vgcreate volume /dev/nvme0n1
 
-lvcreate volume --name root --size  32g
-lvcreate volume --name boot --size   1g
-lvcreate volume --name data --size 128g
-lvcreate volume --name home --size 128g
-lvcreate volume --name var  --size  16g
-lvcreate volume --name swap --size  32g
+lvcreate volume --name root      --size  16g
+lvcreate volume --name root-boot --size   1g
+lvcreate volume --name root-home --size  16g
+lvcreate volume --name root-var  --size  16g
+lvcreate volume --name data      --size 256g
+lvcreate volume --name swap      --size  32g
 
 # make the filesystems
 
