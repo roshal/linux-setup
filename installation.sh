@@ -24,30 +24,30 @@ lvcreate volume --name swap      --size  32g
 
 mkfs --type fat -n ESP -i 64617461 /dev/sda1
 
-mkfs --type ext4 /dev/mapper/volume-root
-mkfs --type ext4 /dev/mapper/volume-boot
-mkfs --type ext4 /dev/mapper/volume-data
-mkfs --type ext4 /dev/mapper/volume-home
-mkfs --type ext4 /dev/mapper/volume-var
+mkfs --type ext4 /dev/volume/root
+mkfs --type ext4 /dev/volume/root-boot
+mkfs --type ext4 /dev/volume/root-home
+mkfs --type ext4 /dev/volume/root-var
+mkfs --type ext4 /dev/volume/data
 
-mkswap /dev/mapper/volume-swap
-swapon /dev/mapper/volume-swap
+mkswap /dev/volume/swap
+swapon /dev/volume/swap
 
 # mount the file systems
 
 mount /dev/sda1 /mnt/mnt
 
-mount --options discard --source /dev/mapper/volume-root --target /mnt
+mount --options discard --source /dev/volume/root --target /mnt
 
-mkdir /mnt/boot
 mkdir /mnt/-
+mkdir /mnt/boot
 mkdir /mnt/home
 mkdir /mnt/var
 
-mount --options discard --source /dev/mapper/volume-boot --target /mnt/boot
-mount --options discard --source /dev/mapper/volume-data --target /mnt/-
-mount --options discard --source /dev/mapper/volume-home --target /mnt/home
-mount --options discard --source /dev/mapper/volume-var  --target /mnt/var
+mount --options discard --source /dev/volume/data      --target /mnt/-
+mount --options discard --source /dev/volume/root-boot --target /mnt/boot
+mount --options discard --source /dev/volume/root-home --target /mnt/home
+mount --options discard --source /dev/volume/root-var  --target /mnt/var
 
 # installation
 
