@@ -33,12 +33,12 @@ alias g-c-l='cd /-/git.esphere.local.copy/frontend/Leda'
 
 alias pacman='sudo pacman --color always'
 
-# fix webstorm window draw
-# https://wiki.archlinux.org/index.php/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
+### fix webstorm window draw
+# # https://wiki.archlinux.org/index.php/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-# enable mpeg-4
-# https://wiki.archlinux.org/index.php/Hardware_video_acceleration#VA-API_drivers
+### enable mpeg-4
+# # https://wiki.archlinux.org/index.php/Hardware_video_acceleration#VA-API_drivers
 VAAPI_MPEG4_ENABLED=true
 
 # xkb not for sway
@@ -78,7 +78,7 @@ complete -F _yargs_completions nps
 
 export LC_MESSAGES=ru_RU.UTF-8
 
-# https://wiki.archlinux.org/index.php?oldid=584342#man
+# # https://wiki.archlinux.org/index.php?oldid=584342#man
 function man {
   LESS_TERMCAP_me=$'\e[0m' \
   LESS_TERMCAP_ue=$'\e[0m' \

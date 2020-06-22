@@ -19,9 +19,9 @@ sudo sysctl vm.swappiness=25
 sudo sysctl vm.swappiness=50
 sudo sysctl vm.swappiness=75
 
-# device                directory  type  options         dump  pass
-# /dev/mapper/lvm-swap  none       swap  discard,pri=80  0     0
-# /swapfile             none       swap  discard,pri=20  0     0
+# # ####################  directory  type  options         dump  pass
+# # /dev/mapper/lvm-swap  none       swap  discard,pri=80  0     0
+# # /swapfile             none       swap  discard,pri=20  0     0
 
 sudo swapon --priority -10 /swapfile
 mkswap

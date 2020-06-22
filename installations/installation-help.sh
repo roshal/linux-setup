@@ -1,42 +1,42 @@
 
-# network
+### network
 wifi-menu
 
-# ntp
+### ntp
 timedatectl set-ntp true
 
-# restore
+### restore
 gpart /dev/sdb
 
-# rescue
+### rescue
 parted /dev/sdb rescue 2048 1073741823
 
-# diff
+### diff
 grub-mkconfig | diff - /boot/grub/grub.cfg
 
-# ids
+### ids
 blkid
 
-# mbr
+### mbr
 echo o.n.p.1....w. | tr . '\n' | fdisk /dev/sdb
 
-# lvm
+### lvm
 pvs
 vgs
 lvs
 
-# parted
+### parted
 parted -s /dev/sdb mklabel gpt mkpart esp fat32 0% 100% set 1 boot on print
 
-# mounts
+### mounts
 findmnt
 
-# lspci
+### lspci
 lspci
 
-# dmesg
+### dmesg
 dmesg
 
-# xrandr
+### xrandr
 xrandr
 xrandr --prop

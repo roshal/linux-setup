@@ -42,17 +42,17 @@ alias _cff='cd /-/git.esphere.local.copy/frontend/Fish'
 alias _cfl='cd /-/git.esphere.local.copy/frontend/Leda'
 alias _ccl='cd /-/git.esphere.local.copy/courier/light-ui'
 
-# fix webstorm window draw
-# https://github.com/swaywm/sway/wiki/Running-programs-natively-under-wayland#java-under-xwayland
-# https://wiki.archlinux.org/index.php/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
+### fix webstorm window draw
+# # https://github.com/swaywm/sway/wiki/Running-programs-natively-under-wayland#java-under-xwayland
+# # https://wiki.archlinux.org/index.php/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
 export _JAVA_AWT_WM_NONREPARENTING=1
 export AWT_TOOLKIT=MToolkit
 
-# xkb not for sway
+### xkb not for sway
 export XKB_DEFAULT_LAYOUT=us,ru
 export XKB_DEFAULT_OPTIONS=grp:caps_toggle
 
-# nvm
+### nvm
 source /usr/share/nvm/init-nvm.sh
 
 ###-begin-nps-completions-###
@@ -85,7 +85,7 @@ complete -F _yargs_completions nps
 
 export LC_MESSAGES=ru_RU.UTF-8
 
-# https://wiki.archlinux.org/index.php?oldid=584342#man
+# # https://wiki.archlinux.org/index.php?oldid=584342#man
 function man {
   LESS_TERMCAP_me=$'\e[0m' \
   LESS_TERMCAP_ue=$'\e[0m' \
@@ -118,12 +118,12 @@ if [[ ${-} =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
 if [[ ${-} =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
-# https://wiki.archlinux.org/index.php/Wayland#Qt_5
-# https://wiki.qt.io/QtWayland#Run_Qt_applications_as_Wayland_clients
+# # https://wiki.archlinux.org/index.php/Wayland#Qt_5
+# # https://wiki.qt.io/QtWayland#Run_Qt_applications_as_Wayland_clients
 export QT_QPA_PLATFORM=wayland
 
-# https://github.com/swaywm/sway/wiki/Running-programs-natively-under-wayland#firefox
-# https://wiki.archlinux.org/index.php/Firefox#Wayland
+# # https://github.com/swaywm/sway/wiki/Running-programs-natively-under-wayland#firefox
+# # https://wiki.archlinux.org/index.php/Firefox#Wayland
 export MOZ_ENABLE_WAYLAND=1
 
 export WLR_RDP_TLS_CERT_PATH=/-/remmina/tls.crt

@@ -7,12 +7,12 @@ nano /etc/sudoers
 
 useradd -m -G wheel -s /bin/zsh user
 passwd user
-# pass
+# # pass
 
 exit
 
-# user
-# pass
+# # user
+# # pass
 
 sudo pacman -Sy
 sudo pacman -Su
@@ -43,7 +43,7 @@ sudo pacman --sync transmission-gtk
 sudo pacman --sync vlc
 
 nano .xinitrc
-# exec startxfce4
+# # exec startxfce4
 chmod +x .xinitrc
 
 sudo pacman --sync networkmanager
@@ -56,4 +56,4 @@ systemctl start dhcpcd
 
 sudo systemctl reboot
 
-sudo sed --in-place '/^#Color$/s/^.//' /etc/pacman.conf
+sudo sed --in-place '/^#Color$/s/.//' /etc/pacman.conf

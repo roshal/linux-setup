@@ -1,11 +1,11 @@
 
-# pre-installation
+### pre-installation
 
-# update the system clock
+### update the system clock
 
 timedatectl set-ntp true
 
-# partition the disks
+### partition the disks
 
 sgdisk --zap-all --new 0 --typecode 0:ef00 /dev/sda
 sgdisk --zap-all /dev/nvme0n1
@@ -15,12 +15,12 @@ vgcreate volume /dev/nvme0n1
 
 lvcreate volume --name root      --size  16g
 lvcreate volume --name root-boot --size   1g
-lvcreate volume --name root-home --size  16g
-lvcreate volume --name root-var  --size  16g
+lvcreate volume --name root-home --size  32g
+lvcreate volume --name root-var  --size  32g
 lvcreate volume --name data      --size 256g
 lvcreate volume --name swap      --size  32g
 
-# make the filesystems
+### make the filesystems
 
 mkfs --type fat -n ESP -i 64617461 /dev/sda1
 
@@ -33,7 +33,7 @@ mkfs --type ext4 /dev/volume/data
 mkswap /dev/volume/swap
 swapon /dev/volume/swap
 
-# mount the file systems
+### mount the file systems
 
 mount /dev/sda1 /mnt/mnt
 
@@ -49,9 +49,9 @@ mount --options discard --source /dev/volume/root-boot --target /mnt/boot
 mount --options discard --source /dev/volume/root-home --target /mnt/home
 mount --options discard --source /dev/volume/root-var  --target /mnt/var
 
-# installation
+### installation
 
-# select the mirrors
+### select the mirrors
 
 pacman --sync --refresh
 
@@ -65,17 +65,17 @@ rankmirrors mirrors > /etc/pacman.d/mirrorlist
 
 sed --in-place '/^#/d' -- /etc/pacman.d/mirrorlist
 
-# install essential packages
+### install essential packages
 
 pacstrap /mnt
 
-# configure the system
+### configure the system
 
-# fstab
+### fstab
 
 genfstab /mnt >> /mnt/etc/fstab
 
-# chroot
+### chroot
 
 arch-chroot /mnt
 
@@ -83,31 +83,31 @@ arch-chroot /mnt
 yes | pacman --sync base-devel
 yes | pacman --sync dhcpcd
 
-# time zone
+### time zone
 
 ln --force --symbolic /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 
 hwclock --systohc
 
-# localization
+### localization
 
 sed --in-place '/^#en_US\.UTF-8\>/s/./ /' /etc/locale.gen
 sed --in-place '/^#ru_RU\.UTF-8\>/s/./ /' /etc/locale.gen
 
 locale-gen
 
-# localectl set-locale LANG=en_US.UTF-8
+### localectl set-locale LANG=en_US.UTF-8
 
 echo 'LANG=en_US.UTF-8' >> /etc/locale.conf
 echo 'LC_TIME=C' >> /etc/locale.conf
 echo 'LC_COLLATE=C' >> /etc/locale.conf
 echo 'LC_MESSAGES=ru_RU.UTF-8' >> /etc/locale.conf
 
-# network configuration
+### network configuration
 
 echo host > /etc/hostname
 
-# initramfs
+### initramfs
 
 yes | pacman --sync linux
 yes | pacman --sync linux-firmware
@@ -117,11 +117,11 @@ sed --in-place '/^HOOKS\>/s/\<block\>/& lvm2/' /etc/mkinitcpio.conf
 
 mkinitcpio -p linux
 
-# root password
+### root password
 
 echo root:pass | sudo chpasswd
 
-# boot loader
+### boot loader
 
 yes | pacman --sync efibootmgr
 yes | pacman --sync grub
@@ -133,7 +133,7 @@ grub-mkconfig --output /boot/grub/grub.cfg
 
 grub-install --efi-directory /mnt
 
-# reboot
+### reboot
 
 exit
 
@@ -141,9 +141,9 @@ umount --recursive /mnt
 
 reboot
 
-# post-installation
+### post-installation
 
-# login root
+### login root
 
 sed --in-place '/^# %wheel ALL=(ALL) ALL$/s/^..//' /etc/sudoers
 
@@ -153,7 +153,7 @@ echo user:pass | chpasswd
 
 exit
 
-# login user
+### login user
 
 sudo systemctl enable --now dhcpcd
 

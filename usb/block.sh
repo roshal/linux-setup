@@ -24,7 +24,8 @@ less --ch
 lsblk -O | less -S
 lsblk --output-all | less --chop-long-lines
 
-fatlabel /dev/sdb arch
+# mkfs.fat -n LABEL /dev/sdb1
+fatlabel /dev/sdb LABEL
 
 mount
 mount -l
