@@ -131,7 +131,8 @@ mkdir /boot/grub
 
 grub-mkconfig --output /boot/grub/grub.cfg
 
-grub-install --efi-directory /mnt
+# # https://wiki.archlinux.org/index.php/GRUB#Default/fallback_boot_path
+grub-install --efi-directory /mnt --removable
 
 ### reboot
 
